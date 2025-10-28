@@ -1,5 +1,5 @@
 from backend.booking.models import (
-    Client, Professional, Service, Location,
+    Client, Professional, Service, Facility, ServiceFacility,
     Appointment, AppointmentStatus
 )
 from datetime import datetime, timedelta
@@ -44,16 +44,24 @@ def run():
         Service.objects.create(name="Therapy Session", duration=timedelta(minutes=45), price=70.00),
     ]
 
-    # Locations
-    locations = [
-        Location.objects.create(
+    # Facilities
+    facilities = [
+        Facility.objects.create(
             name="Downtown Clinic", address="123 Main St, Cityville",
             phone="111222333", email="downtown@example.com"
         ),
-        Location.objects.create(
+        Facility.objects.create(
             name="Uptown Wellness Center", address="456 Elm St, Cityville",
             phone="444555666", email="uptown@example.com"
         ),
+    ]
+
+    # Linking service and facility
+    service_facility = [
+        ServiceFacility.objects.create(facility=facilities[0], service=services[0]),
+        ServiceFacility.objects.create(facility=facilities[0], service=services[1]),
+        ServiceFacility.objects.create(facility=facilities[1], service=services[1]),
+        ServiceFacility.objects.create(facility=facilities[1], service=services[2]),
     ]
 
     # Appointments
@@ -63,15 +71,15 @@ def run():
             client=clients[i % len(clients)],
             professional=professionals[i % len(professionals)],
             service=services[i % len(services)],
-            location=locations[i % len(locations)],
+            facility=facilities[i % len(facilities)],
             date=base_date + timedelta(hours=i),
             status=AppointmentStatus.SCHEDULED if i % 4 != 0 else AppointmentStatus.COMPLETED
         )
-
 
 def delete_all_data():
     Client.objects.all().delete()
     Professional.objects.all().delete()
     Service.objects.all().delete()
-    Location.objects.all().delete()
+    Facility.objects.all().delete()
     Appointment.objects.all().delete()
+    ServiceFacility.objects.all().delete()

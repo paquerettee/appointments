@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import config from "./config";
 import axios from "axios";
 
 function Appointments() {
@@ -6,9 +7,8 @@ function Appointments() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("Appointments: ");
     axios
-      .get("http://127.0.0.1:8000/api/appointments/")
+      .get(config.BACKEND_URL + "appointments/")
       .then((response) => {
         console.log(response.data);
         setAppointments(response.data);

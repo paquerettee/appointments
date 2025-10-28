@@ -21,11 +21,12 @@ class Service(models.Model):
     def __str__(self):
         return self.name
 
-class Location(models.Model):
+class Facility(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=255)
     phone = models.CharField(max_length=20)
     email = models.EmailField()
+    services = models.ManyToManyField(Service, through='ServiceFacility')
     def __str__(self):
         return self.name
 
@@ -38,22 +39,22 @@ class ProfessionalService(models.Model):
     def __str__(self):
         return f"{self.professional} – {self.service}"
 
-class ProfessionalLocation(models.Model):
+class ProfessionalFacility(models.Model):
     professional = models.ForeignKey(Professional, on_delete=models.CASCADE)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    facility = models.ForeignKey(Facility, on_delete=models.CASCADE)
     class Meta:
-        unique_together = ('professional', 'location')
+        unique_together = ('professional', 'facility')
 
     def __str__(self):
-        return f"{self.professional} @ {self.location}"
+        return f"{self.professional} @ {self.facility}"
 
-class ServiceLocation(models.Model):
+class ServiceFacility(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    facility = models.ForeignKey(Facility, on_delete=models.CASCADE)
     class Meta:
-        unique_together = ('service', 'location')
+        unique_together = ('service', 'facility')
     def __str__(self):
-        return f"{self.service} @ {self.location}"
+        return f"{self.service} @ {self.facility}"
 
 
 class AppointmentStatus(models.TextChoices):
@@ -66,7 +67,7 @@ class Appointment(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     professional = models.ForeignKey(Professional, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    facility = models.ForeignKey(Facility, on_delete=models.CASCADE)
     date = models.DateTimeField()
     date_established = models.DateTimeField(auto_now_add=True)
     status = models.CharField(
