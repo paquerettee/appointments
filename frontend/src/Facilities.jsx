@@ -36,7 +36,7 @@ function Facility({ facility }) {
         />
       </div>
       <div>
-        <h3>{facility.name}</h3>
+        <h3 className="text-3xl">{facility.name}</h3>
         <p>{facility.address}</p>
         <ul>
           {facility.services.map((service) => (
