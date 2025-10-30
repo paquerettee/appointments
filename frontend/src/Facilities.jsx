@@ -17,19 +17,35 @@ function Facilities() {
       <ul>
         {facilities.map((facility) => (
           <li key={facility.id}>
-            {" "}
-            <h3>{facility.name}</h3>
-            <p>{facility.address}</p>
-            <ul>
-              {facility.services.map((service) => (
-                <li key={service.id}>
-                  {service.name} – ${service.price}
-                </li>
-              ))}
-            </ul>
+            <Facility facility={facility} />
           </li>
         ))}
       </ul>
+    </>
+  );
+}
+
+function Facility({ facility }) {
+  return (
+    <>
+      <div>
+        <img
+          src={facility.main_img}
+          // alt={facility.imgdesc}
+          style={{ width: "100%", borderRadius: "8px" }}
+        />
+      </div>
+      <div>
+        <h3>{facility.name}</h3>
+        <p>{facility.address}</p>
+        <ul>
+          {facility.services.map((service) => (
+            <li key={service.id}>
+              {service.name} – ${service.price}
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }

@@ -48,11 +48,12 @@ def run():
     facilities = [
         Facility.objects.create(
             name="Downtown Clinic", address="123 Main St, Cityville",
-            phone="111222333", email="downtown@example.com"
+            phone="111222333", email="downtown@example.com", main_img="facilities/GPTImage_001.png"
+
         ),
         Facility.objects.create(
             name="Uptown Wellness Center", address="456 Elm St, Cityville",
-            phone="444555666", email="uptown@example.com"
+            phone="444555666", email="uptown@example.com", main_img="facilities/GPTImage_002.png"
         ),
     ]
 

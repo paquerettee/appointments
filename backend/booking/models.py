@@ -26,6 +26,7 @@ class Facility(models.Model):
     address = models.CharField(max_length=255)
     phone = models.CharField(max_length=20)
     email = models.EmailField()
+    main_img = models.ImageField(upload_to='facilities')
     services = models.ManyToManyField(Service, through='ServiceFacility')
     def __str__(self):
         return self.name

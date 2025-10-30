@@ -11,8 +11,8 @@ class FacilitySerializer(serializers.ModelSerializer):
     services = ServiceSerializer(many=True, read_only=True)
     class Meta:
         model = Facility
-        # fields = '__all__'
-        fields = ['id', 'name', 'address', 'email', 'phone', 'services']
+        fields = '__all__'
+        # fields = ['id', 'name', 'address', 'email', 'phone', 'main_img', 'services']
 
 class ServiceFacilitySerializer(serializers.ModelSerializer):
     class Meta:
