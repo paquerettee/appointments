@@ -6,6 +6,10 @@ function Appointments() {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // const addNewAppointment = () => {
+  //   console.log("Add new appointment");
+  // };
+
   useEffect(() => {
     axios
       .get(config.BACKEND_URL + "appointments/")

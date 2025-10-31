@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Facility, Service, ServiceFacility, Appointment
+from .models import Facility, Service, ServiceFacility, Professional, Client, Appointment
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,6 +17,16 @@ class FacilitySerializer(serializers.ModelSerializer):
 class ServiceFacilitySerializer(serializers.ModelSerializer):
     class Meta:
         model = ServiceFacility
+        fields = '__all__'
+
+class ProfessionalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Professional
+        fields = '__all__'
+
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
         fields = '__all__'
 
 class AppointmentSerializer(serializers.ModelSerializer):
